@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/userFragment"
-        android:name="com.sunnyweather.android.ui.place.UserFragment"/>
+        android:name="com.sunnyweather.android.ui.place.MqttMessageFragment"/>
+
 
 </FrameLayout>

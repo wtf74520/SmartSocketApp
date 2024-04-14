@@ -23,16 +23,16 @@ object Repository {
         }
         emit(result)
     }
-    fun searchUser(query: String) = liveData(Dispatchers.IO) {
+    fun uploadMqttMessage(msg:String, value: String) = liveData(Dispatchers.IO) {
         val result = try {
-            Log.d(SunnyWeatherApplication.TAG, "liveData(Dispatchers.IO) query : $query")
+            Log.d(SunnyWeatherApplication.TAG, "liveData(Dispatchers.IO) msg : $msg value : $value")
 
-            val userResponse = UserNetwork.searchUser(query)
-            Log.d(SunnyWeatherApplication.TAG, "userResponse : $userResponse ")
+            val mqttResponse = UpStreamNetwork.uploadMqttMessage(msg,value)
+            Log.d(SunnyWeatherApplication.TAG, "userResponse : $mqttResponse ")
             if (true) {
-                Result.success(userResponse)
+                Result.success(mqttResponse)
             } else {
-                Result.failure<UserResponse>(RuntimeException("response name is ${userResponse}"))
+                Result.failure<UserResponse>(RuntimeException("response name is ${mqttResponse}"))
             }
         } catch (e: Exception) {
             Result.failure<UserResponse>(e)

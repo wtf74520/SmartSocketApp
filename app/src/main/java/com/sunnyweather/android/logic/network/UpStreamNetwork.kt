@@ -1,7 +1,7 @@
 
 import android.util.Log
 import com.sunnyweather.android.SunnyWeatherApplication
-import com.sunnyweather.android.logic.network.UserService
+import com.sunnyweather.android.logic.network.UpStreamService
 import com.sunnyweather.android.logic.network.UserServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,14 +10,14 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-object UserNetwork {
+object UpStreamNetwork {
 
-    private val userService = UserServiceCreator.create<UserService>()
+    private val upStreamService = UserServiceCreator.create<UpStreamService>()
 
-    suspend fun searchUser(id:String)  {
-        Log.d(SunnyWeatherApplication.TAG, "searchUser function called with query: $id")
-        val result = userService.searchUser(id).await()
-        Log.d(SunnyWeatherApplication.TAG, "searchUser function executed with result: $result")
+    suspend fun uploadMqttMessage(msg:String, value:String)  {
+        Log.d(SunnyWeatherApplication.TAG, "uploadMqttMessage function called with query: $value")
+        val result = upStreamService.uploadMqttMessage(msg,value).await()
+        Log.d(SunnyWeatherApplication.TAG, "uploadMqttMessage function executed with result: $result")
         return
     }
 
