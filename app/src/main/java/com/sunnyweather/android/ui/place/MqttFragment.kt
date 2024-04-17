@@ -13,10 +13,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sunnyweather.android.R
 import com.sunnyweather.android.SunnyWeatherApplication
-import kotlinx.android.synthetic.main.user_fragment.searchUserEdit
-import kotlinx.android.synthetic.main.user_fragment.usrBgImageView
 
-class MqttMessageFragment : Fragment() {
+import kotlinx.android.synthetic.main.fragment_main.backGroudImageView
+import kotlinx.android.synthetic.main.debug_edit_text_fragment.searchDebugEdit
+import kotlinx.android.synthetic.main.interact.plugin_toggle
+class MqttFragment : Fragment() {
 
     val viewModel by lazy { ViewModelProviders.of(this).get(MqttMessageViewModel::class.java) }
 
@@ -25,36 +26,45 @@ class MqttMessageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.user_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
-        searchUserEdit.addTextChangedListener { editable ->
+        searchDebugEdit.addTextChangedListener { editable ->
             val content = editable.toString()
             if (content.isNotEmpty()) {
-                Log.d(SunnyWeatherApplication.TAG, "viewModel.searchUser(content) ")
+                Log.d(SunnyWeatherApplication.TAG, "viewModel.uploadMqttMessage ")
                 viewModel.uploadMqttMessage("on",content)
             } else {
                 //recyclerView.visibility = View.GONE
-                usrBgImageView.visibility = View.VISIBLE
+                backGroudImageView.visibility = View.VISIBLE
 
 
             }
         }
+        plugin_toggle.setOnCheckedChangeListener{_, isChecked ->
+            if (isChecked) {
+                // The switch is checked.
+                Log.d(SunnyWeatherApplication.TAG, "${plugin_toggle.text}  uploadMqttMessage 0")
+                viewModel.uploadMqttMessage("on","0");
+            } else {
+                // The switch isn't checked.
+                Log.d(SunnyWeatherApplication.TAG, "${plugin_toggle.text}  uploadMqttMessage 1")
+                viewModel.uploadMqttMessage("on","1");
+            }
+
+
+        }
         //观察mqttLiveData，一旦出现变化，执行下面的代码
         viewModel.mqttLiveData.observe(this, Observer { result ->
             if (result != null) {
-//                Toast.makeText(activity, "查询到了", Toast.LENGTH_SHORT)
-//                    .show()
-                //activity?.let { Snackbar.make(it.findViewById(android.R.id.content), "查询到了,${viewModel.mqttResponse.toString()}", Snackbar.LENGTH_SHORT).show() }
 
-                usrBgImageView.visibility = View.GONE
+                Log.d(SunnyWeatherApplication.TAG, "viewModel.mqttLiveData  ${result}  ")
+                backGroudImageView.visibility = View.GONE
 
-                //Toast.makeText(activity, "user: ${result.getOrNull().toString()}", Toast.LENGTH_SHORT)
-                //   .show()
             } else {
                 Toast.makeText(activity, "未能查询到", Toast.LENGTH_SHORT)
                     .show()

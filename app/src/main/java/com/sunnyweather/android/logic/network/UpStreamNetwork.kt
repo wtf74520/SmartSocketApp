@@ -1,8 +1,10 @@
 
 import android.util.Log
 import com.sunnyweather.android.SunnyWeatherApplication
+import com.sunnyweather.android.logic.model.MqttStatusResponse
+import com.sunnyweather.android.logic.model.MsgOnResponse
 import com.sunnyweather.android.logic.network.UpStreamService
-import com.sunnyweather.android.logic.network.UserServiceCreator
+import com.sunnyweather.android.logic.network.MqttServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,13 +14,13 @@ import kotlin.coroutines.suspendCoroutine
 
 object UpStreamNetwork {
 
-    private val upStreamService = UserServiceCreator.create<UpStreamService>()
+    private val upStreamService = MqttServiceCreator.create<UpStreamService>()
 
-    suspend fun uploadMqttMessage(msg:String, value:String)  {
-        Log.d(SunnyWeatherApplication.TAG, "uploadMqttMessage function called with query: $value")
+    suspend fun uploadMqttMessage(msg:String, value:String) : MqttStatusResponse {
+        Log.d(SunnyWeatherApplication.TAG, "uploadMqttMessage function called with query: ${value.toString()}")
         val result = upStreamService.uploadMqttMessage(msg,value).await()
-        Log.d(SunnyWeatherApplication.TAG, "uploadMqttMessage function executed with result: $result")
-        return
+        Log.d(SunnyWeatherApplication.TAG, "uploadMqttMessage function executed with result: ${result.toString()}")
+        return result
     }
 
 
