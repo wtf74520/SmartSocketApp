@@ -4,11 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    app:cardCornerRadius="4dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="24dp"
+    android:background="@color/md_theme_primaryContainer"
     android:id="@+id/plugin_status_layout">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="242dp"
         android:orientation="vertical">
@@ -38,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:src="@drawable/icons8_power_button" />
+                    android:src="@drawable/icons8_status_96" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -138,7 +140,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/ultravioletText"
+                        android:id="@+id/powerText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

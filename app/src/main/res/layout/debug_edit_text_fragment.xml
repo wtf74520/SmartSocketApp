@@ -14,13 +14,15 @@
         android:id="@+id/userLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/md_theme_onPrimary">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_margin="16dp"
                 android:id="@+id/searchDebugEdit"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -30,7 +32,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:hint="Debug text"
+                android:hint="Debug"
                 android:background="@drawable/search_bg"/>
 
         </LinearLayout>
