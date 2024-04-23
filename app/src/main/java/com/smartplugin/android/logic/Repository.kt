@@ -26,6 +26,21 @@ object Repository {
         }
         emit(result)
     }
+    fun requestData() = liveData(Dispatchers.IO) {
+        val result = try {
 
+
+            val mqttResponse = UpStreamNetwork.requestData()
+            Log.d(SunnyWeatherApplication.TAG, "Response : ${mqttResponse.toString()} ")
+            if (true) {
+                Result.success(mqttResponse)
+            } else {
+                Result.failure<UserResponse>(RuntimeException("response name is ${mqttResponse.toString()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure<UserResponse>(e)
+        }
+        emit(result)
+    }
 
 }

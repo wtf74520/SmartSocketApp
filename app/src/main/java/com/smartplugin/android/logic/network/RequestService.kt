@@ -9,3 +9,8 @@ interface UpStreamService {
     fun uploadMqttMessage(@Query("msg") msg: String,@Query("value") value: String): Call<MqttStatusResponse>
 
 }
+interface RequestDataService {
+    @GET("appRequestData")
+    fun requestDataService(): Call<MqttStatusResponse>
+
+}
