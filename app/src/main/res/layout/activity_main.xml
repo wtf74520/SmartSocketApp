@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout tools:context=".MainActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
-    android:background="@color/md_theme_surface">
+    android:orientation="vertical"
+    android:background="@color/md_theme_surface"
+    android:gravity="bottom"
+    xmlns:tools="http://schemas.android.com/tools">
 <!--    <fragment-->
 <!--        android:id="@+id/placeFragment"-->
 <!--        android:name="com.sunnyweather.android.ui.place.PlaceFragment"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent" />-->
-
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:background="@color/md_theme_surface"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_main"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:name="com.smartplugin.android.ui.place.MqttFragment"/>
+<!--    <fragment-->
+<!--        android:background="@color/md_theme_surface"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:id="@+id/fragment_main"-->
+<!--        android:name="com.smartplugin.android.ui.place.MqttFragment"/>-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+        android:layout_weight="0"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:cardCornerRadius="24dp"
+        android:layout_gravity="center_horizontal"
+        />
 
 
-</RelativeLayout>
+</LinearLayout>
