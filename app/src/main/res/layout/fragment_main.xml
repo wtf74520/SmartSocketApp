@@ -12,34 +12,27 @@
 <!--        android:layout_alignParentBottom="true"-->
 <!--        android:src="@drawable/bg_place"-->
 <!--        android:contentDescription="TODO" />-->
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
+
+
+
+
+<!--    <include-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_below="@id/toolbar"-->
+<!--        android:id="@+id/search_fragment_include"-->
+<!--        layout="@layout/debug_edit_text_fragment"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:title="@string/app_name"-->
 
-<!--       -->
-<!--        />-->
-    <Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:title="@string/app_name"/>
-    <include
-        android:visibility="gone"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/search_fragment_include"
-        layout="@layout/debug_edit_text_fragment"
-        android:layout_width="match_parent"
+<!--        android:layout_height="wrap_content"-->
+<!--        tools:ignore="NotSibling" />-->
 
-        android:layout_height="wrap_content" />
-
+    <!--        android:layout_below="@id/search_fragment_include"-->
     <include
         android:id="@+id/plugin_status_fragment_include"
         layout="@layout/plugin_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/search_fragment_include"
+
         android:layout_margin="16dp"
         android:layout_marginTop="-44dp" />
     <include

@@ -21,15 +21,9 @@
 
     <!--       -->
     <!--        />-->
-    <Toolbar
-        android:gravity="center"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:title="@string/app_name"/>
+
     <include
         android:visibility="gone"
-        android:layout_below="@id/toolbar"
         android:id="@+id/search_fragment_include"
         layout="@layout/debug_edit_text_fragment"
         android:layout_width="match_parent"

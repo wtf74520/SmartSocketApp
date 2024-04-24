@@ -30,7 +30,7 @@ package com.smartplugin.android.logic.model
     /**
      * The on status of the system.
      */
-    val on: String,
+    val on: Int,
     /**
      * The countdown timer for the system.
      */

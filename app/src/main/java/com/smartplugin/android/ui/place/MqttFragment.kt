@@ -18,6 +18,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.smartplugin.android.SunnyWeatherApplication
 import com.smartplugin.android.databinding.FragmentMainBinding
 import com.smartplugin.android.logic.model.MqttStatusResponse
+import com.smartplugin.android.logic.network.MqttServiceCreator
+import com.smartplugin.android.logic.network.RequestDataService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,7 +30,7 @@ import kotlinx.coroutines.launch
 
 class MqttFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
-
+    private var isResetSwtichExecuted = false
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
@@ -54,19 +56,7 @@ class MqttFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.searchFragmentInclude.searchDebugEdit.addTextChangedListener { editable ->
-            val content = editable.toString()
-            if (content.isNotEmpty()) {
-                Log.d(SunnyWeatherApplication.TAG, "viewModel.uploadMqttMessage ")
-                viewModel.uploadMqttMessage("on", content)
 
-            } else {
-                //recyclerView.visibility = View.GONE
-//                binding.backGroudImageView?.visibility = View.VISIBLE
-
-
-            }
-        }
         //plugin power
         binding.interactFragmentInclude.pluginToggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -156,6 +146,8 @@ class MqttFragment : Fragment() {
 
             }
         })
+
+
         viewModel.requestMqttLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
                 val mqttResponse = result.getOrNull()
@@ -167,20 +159,23 @@ class MqttFragment : Fragment() {
                         if (mqttResponse.state.equals("1")) "Online" else "Offline"
                     //binding.interactFragmentInclude.pluginToggle.isChecked = mqttResponse.state.equals("1")
                     binding.pluginStatusFragmentInclude.powerText.text = mqttResponse.power
+                    if(isResetSwtichExecuted==false){
+                        if(binding.interactFragmentInclude.pluginToggle.isChecked){//switch is checked
+                            Toast.makeText(activity, "isChecked:${binding.interactFragmentInclude.pluginToggle.isChecked}," +
+                                    "mqttResponse.on :${mqttResponse.on}", Toast.LENGTH_SHORT)
+                                .show()
+                            if(mqttResponse.on.toString().equals("0")){
+                                binding.interactFragmentInclude.pluginToggle.toggle()
+                            }
+                        }else {
 
-                    if(binding.interactFragmentInclude.pluginToggle.isChecked){//switch is checked
-                        Toast.makeText(activity, "isChecked:${binding.interactFragmentInclude.pluginToggle.isChecked}," +
-                                "mqttResponse.on :${mqttResponse.on}", Toast.LENGTH_SHORT)
-                            .show()
-                        if(mqttResponse.on.toString().equals("0")){
-                            binding.interactFragmentInclude.pluginToggle.toggle()
-                        }
-                    }else {
-
-                        if(mqttResponse.on.toString().equals("1")){
-                            binding.interactFragmentInclude.pluginToggle.toggle()
+                            if(mqttResponse.on.toString().equals("1")){
+                                binding.interactFragmentInclude.pluginToggle.toggle()
+                            }
                         }
                     }
+                    isResetSwtichExecuted = true
+
                 }
 
             } else {
@@ -195,7 +190,7 @@ class MqttFragment : Fragment() {
 
                 // 暂停协程一段时间，实现定时刷新
                 // 这里的 1000L 是刷新的间隔，单位是毫秒
-                delay(5000L)
+                delay(1000L)
             }
         }
 
