@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object MqttServiceCreator {
 
-    private const val BASE_URL = "http://10.101.6.38:8899/"
+    private const val BASE_URL = "http://192.168.3.32:8899/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

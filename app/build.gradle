@@ -42,6 +42,7 @@ dependencies {
     implementation libs.androidx.appcompat.v110
     implementation libs.androidx.core.ktx.v110
     implementation libs.androidx.constraintlayout.v113
+    implementation libs.androidx.fragment
     testImplementation libs.junit.v412
     androidTestImplementation libs.androidx.runner
     androidTestImplementation libs.androidx.espresso.core.v320
